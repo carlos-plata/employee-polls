@@ -106,4 +106,4 @@ You can log in using one of the following accounts:
 
 ## License
 
-This project is part of an educational curriculum and is provided for learning purposes.
+This project was developed as part of the Udacity React Nanodegree program.
