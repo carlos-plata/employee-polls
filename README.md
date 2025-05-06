@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Employee Polls Web App
 
-## Getting Started
+A React/Redux application that allows employees to create polls, vote on them, and view a leaderboard of the most active users.
 
-First, run the development server:
+## Project Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This application allows employees to:
+- Login with their credentials
+- View unanswered and answered polls
+- Answer polls by selecting one of two options
+- Create new polls with two options
+- See the voting results for polls
+- View a leaderboard of users ranked by their participation
+
+## Installation and Launch Instructions
+
+Follow these steps to set up and run the project:
+
+1. Clone the repository
+   ```
+   git clone https://github.com/your-username/employee-polls.git
+   cd employee-polls
+   ```
+
+2. Install dependencies
+   ```
+   npm install
+   ```
+
+3. Start the development server
+   ```
+   npm run dev
+   ```
+
+4. Open your browser and navigate to http://localhost:3000
+
+## Testing
+
+To run the unit tests:
+```
+npm test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application follows a modular architecture with the following structure:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+/
+├── components/                # React components
+│   ├── layout/                # Layout components (Navbar, Layout, etc.)
+│   ├── auth/                  # Authentication components and context
+│   ├── polls/                 # Poll-related components
+│   └── leaderboard/           # Leaderboard components
+├── pages/                     # Next.js pages
+├── store/                     # Redux store and state management
+│   ├── slices/                # Redux slices (auth, polls, users)
+│   └── thunks/                # Async thunks (auth, polls)
+├── utils/                     # Utility functions and API
+├── styles/                    # CSS styles
+├── tests/                     # Unit tests
+└── public/                    # Static assets
+    └── avatars/               # User avatars
+```
 
-## Learn More
+## Login Information
 
-To learn more about Next.js, take a look at the following resources:
+You can log in using one of the following accounts:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Username:** sarahedo
+  **Password:** password123
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Username:** tylermcginnis
+  **Password:** abc321
 
-## Deploy on Vercel
+- **Username:** mtsamis
+  **Password:** xyz123
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Username:** zoshikanlu
+  **Password:** pass246
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technologies Used
+
+- React
+- Next.js 
+- Redux Toolkit
+- Tailwind CSS
+- Jest and React Testing Library
+
+## Features
+
+### Authentication
+- Login with username and password
+- Persistent login state
+- Protected routes for authenticated users
+
+### Polls
+- View unanswered and answered polls
+- Vote on polls
+- Create new polls with two options
+- See voting statistics
+
+### Leaderboard
+- View users ranked by their participation
+- See how many polls each user has created and answered
+
+## License
+
+This project is part of an educational curriculum and is provided for learning purposes.
