@@ -1,4 +1,3 @@
-// store/thunks/pollsThunks.js
 import { 
     fetchPollsStart, 
     fetchPollsSuccess, 

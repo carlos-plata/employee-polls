@@ -1,4 +1,3 @@
-// store/index.js
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import pollsReducer from './slices/pollsSlice';

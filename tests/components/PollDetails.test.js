@@ -73,8 +73,12 @@ describe('PollDetails', () => {
     );
     
     // Assert
-    expect(screen.getByText(/100%/)).toBeInTheDocument();
-    expect(screen.getByText(/0%/)).toBeInTheDocument();
+    // Use getAllByText to handle multiple elements with the same text
+    const percentages100 = screen.getAllByText(/100%/i);
+    const percentages0 = screen.getAllByText(/0%/i);
+    
+    expect(percentages100.length).toBeGreaterThan(0);
+    expect(percentages0.length).toBeGreaterThan(0);
     expect(screen.getByText(/total votes: 1/i)).toBeInTheDocument();
     expect(screen.getByText(/your vote/i)).toBeInTheDocument();
   });

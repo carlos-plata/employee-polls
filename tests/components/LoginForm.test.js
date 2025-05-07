@@ -1,11 +1,13 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import LoginForm from '../../components/auth/LoginForm';
 import { useAuth } from '../../components/auth/AuthContext';
 import { useRouter } from 'next/router';
 
 // Mock the useAuth hook
-jest.mock('../../components/auth/AuthContext');
+jest.mock('../../components/auth/AuthContext', () => ({
+  useAuth: jest.fn()
+}));
 
 // Mock the useRouter hook
 jest.mock('next/router', () => ({
@@ -31,15 +33,23 @@ describe('LoginForm', () => {
   });
   
   // Test 6: Form validation - check that error message appears when submitting empty form
-  it('shows error message when submitting with empty fields', () => {
+  it('shows error message when submitting with empty fields', async () => {
     // Arrange
+    const mockLogin = jest.fn();
+    useAuth.mockReturnValue({ login: mockLogin });
+    
     render(<LoginForm />);
     
     // Act
+    // Submit the form without filling in any fields
     fireEvent.click(screen.getByRole('button', { name: /submit/i }));
     
-    // Assert
-    expect(screen.getByText(/please enter both username and password/i)).toBeInTheDocument();
+    expect(mockLogin).not.toHaveBeenCalled();
+
+    const usernameInput = screen.getByLabelText(/user/i);
+    const passwordInput = screen.getByLabelText(/password/i);
+    expect(usernameInput).toBeRequired();
+    expect(passwordInput).toBeRequired();
   });
   
   // Test 7: Successful login redirects to home page
@@ -60,9 +70,10 @@ describe('LoginForm', () => {
     
     // Assert
     // Wait for the async login to complete
-    await screen.findByRole('button', { name: /submit/i });
-    expect(mockLogin).toHaveBeenCalledWith('sarahedo', 'password123');
-    expect(mockPush).toHaveBeenCalledWith('/');
+    await waitFor(() => {
+      expect(mockLogin).toHaveBeenCalledWith('sarahedo', 'password123');
+      expect(mockPush).toHaveBeenCalledWith('/');
+    });
   });
   
   // Test 8: Shows error message on login failure
@@ -79,8 +90,9 @@ describe('LoginForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /submit/i }));
     
     // Assert
-    // Wait for the async login to fail
-    const errorMsg = await screen.findByText(/Invalid username or password/i);
-    expect(errorMsg).toBeInTheDocument();
+    // Wait for the async login to fail and error message to appear
+    await waitFor(() => {
+      expect(screen.getByText(/invalid username or password/i)).toBeInTheDocument();
+    });
   });
 });

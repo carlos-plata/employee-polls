@@ -1,4 +1,3 @@
-// store/thunks/authThunks.js
 import { loginStart, loginSuccess, loginFailure } from '../slices/authSlice';
 import { _getUsers } from '../../utils/_DATA';
 

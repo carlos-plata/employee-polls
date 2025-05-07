@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/components/__snapshots__
 
 # next.js
 /.next/
